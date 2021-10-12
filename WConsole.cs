@@ -4,13 +4,13 @@ namespace Watersharp
 {
 
     /// <summary>
-    /// Дополнительные вохможности операций ввода-вывода
+    /// Additional features for IO system
     /// </summary>
     public static class WConsole
     {
 
         /// <summary>
-        /// Чтение строки из потока ввода
+        /// Basic ReadLine
         /// </summary>
         public static string ReadLine()
         {
@@ -18,9 +18,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Чтение строки из потока ввода
+        /// Custom ReadLine with message
         /// </summary>
-        /// <param name="message">Сообщение пользователю</param>
+        /// <param name="message">Message for user</param>
         public static string ReadLine(string message)
         {
             System.Console.Write(message);
@@ -28,7 +28,7 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Чтение символа из потока ввода
+        /// Basic Read
         /// </summary>
         public static int Read()
         {
@@ -36,9 +36,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Чтение символа из потока ввода
+        /// Custom Read with message
         /// </summary>
-        /// <param name="message">Сообщение пользователю</param>
+        /// <param name="message">Message for user</param>
         public static int Read(string message)
         {
             System.Console.Write(message);
@@ -46,7 +46,7 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Чтение кода нажатой клавиши из потока ввода
+        /// Basic ReadKey
         /// </summary>
         public static ConsoleKeyInfo ReadKey()
         {
@@ -54,9 +54,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Чтение кода нажатой клавиши из потока ввода
+        /// Custom ReadKey with message
         /// </summary>
-        /// <param name="message">Сообщение пользователю</param>
+        /// <param name="message">Message for user</param>
         public static ConsoleKeyInfo ReadKey(string message)
         {
             System.Console.Write(message);

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Watersharp Library")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simplification for C#")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Leviafan4ik Lab.")]
 [assembly: AssemblyProduct("Watersharp Library")]
-[assembly: AssemblyCopyright("Copyright © Leviafan4ik Lab.  2020")]
+[assembly: AssemblyCopyright("Copyright © Leviafan4ik Lab.  2021")]
 [assembly: AssemblyTrademark("Leviafan4ik Lab.")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.0.1")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.0.0.3")]
+[assembly: AssemblyFileVersion("0.2.1.0")]

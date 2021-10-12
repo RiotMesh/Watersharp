@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Watersharp
 {
     /// <summary>
-    /// Класс для работы с файлами конфигураций (.INI)
+    /// Working with .ini cofiguration files
     /// </summary>
     public class Config
     {
@@ -20,26 +20,32 @@ namespace Watersharp
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder Value, int Size, string FilePath);
 
-        public Config(string IniPath)
+        /*====================================================================================================*/
+
+        public Config(string iniPath)
         {
-            Path = new FileInfo(IniPath).FullName.ToString();
+            Path = new FileInfo(iniPath).FullName.ToString();
         }
 
         /// <summary>
-        /// Изменение пути к рабочему ini файлу
+        /// Change path to .ini file
         /// </summary>
-        /// <param name="NewPath">Путь к файлу</param>
-        public static void SetIniPath(string NewPath)
+        /// <param name="newPath">.ini file path</param>
+        public static void SetIniPath(string newPath)
         {
-            Path = NewPath;
+            Path = newPath;
         }
 
+        /*====================================================================================================*/
+        // GET VALUE
+
         /// <summary>
-        /// Чтение значения параметра по имени (строка)
+        /// Read param as STRING by name
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
-        public string GetString(string key, string section = "main")
+        /// <param name="key">Param name</param>
+        /// <param name="section">Param section (default - main)</param>
+        /// <returns>Param value as STRING</returns>
+        public string Get(string key, string section = "main")
         {
             try
             {
@@ -49,15 +55,16 @@ namespace Watersharp
             }
             catch
             {
-                throw new Exception("Ошибка чтения параметра. Проверьте правильность передаваемых данных");
+                throw new Exception("Watersharp-Config: Error reading .ini file");
             }
         }
 
         /// <summary>
-        /// Чтение значения параметра по имени (целое число)
+        /// Read param as INT by name
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="section">Param section (default - main)</param>
+        /// <returns>Param value as INT</returns>
         public int GetInt(string key, string section = "main")
         {
             try
@@ -68,15 +75,16 @@ namespace Watersharp
             }
             catch
             {
-                throw new Exception("Ошибка чтения параметра. Проверьте правильность передаваемых данных");
+                throw new Exception("Watersharp-Config: Error reading .ini file as int");
             }
         }
 
         /// <summary>
-        /// Чтение значения параметра по имени (число двойной точности)
+        /// Read param as DOUBLE by name
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="section">Param section (default - main)</param>
+        /// <returns>Param value as DOUBLE</returns>
         public double GetDouble(string key, string section = "main")
         {
             try
@@ -87,51 +95,75 @@ namespace Watersharp
             }
             catch
             {
-                throw new Exception("Ошибка чтения параметра. Проверьте правильность передаваемых данных");
+                throw new Exception("Watersharp-Config: Error reading .ini file as double");
             }
         }
 
         /// <summary>
-        /// Запись значения параметра по имени (строка)
+        /// Read param as FLOAT by name
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="value">Значение</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="section">Param section (default - main)</param>
+        /// <returns>Param value as FLOAT</returns>
+        public float GetFloat(string key, string section = "main")
+        {
+            try
+            {
+                StringBuilder PreValue = new StringBuilder(255);
+                GetPrivateProfileString(section, key, "", PreValue, 255, Path);
+                return float.Parse(PreValue.ToString());
+            }
+            catch
+            {
+                throw new Exception("Watersharp-Config: Error reading .ini file as float");
+            }
+        }
+
+        /*====================================================================================================*/
+        // SET VALUE
+
+        /// <summary>
+        /// Write param value
+        /// </summary>
+        /// <param name="key">Param name</param>
+        /// <param name="value">Param value</param>
+        /// <param name="section">Param section (default - main)</param>
         public void Set(string key, string value, string section = "main")
         {
             WritePrivateProfileString(section, key, value, Path);
         }
 
         /// <summary>
-        /// Запись значения параметра по имени (целое число)
+        /// Write param value
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="value">Значение</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="value">Param value</param>
+        /// <param name="section">Param section (default - main)</param>
         public void Set(string key, int value, string section = "main")
         {
             WritePrivateProfileString(section, key, value.ToString(), Path);
         }
 
         /// <summary>
-        /// Запись значения параметра по имени (число двойной точности)
+        /// Write param value
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="value">Значение</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="value">Param value</param>
+        /// <param name="section">Param section (default - main)</param>
         public void Set(string key, double value, string section = "main")
         {
             WritePrivateProfileString(section, key, value.ToString(), Path);
         }
 
         /// <summary>
-        /// Проверка существования параметра с указанным именем
+        /// Write param value
         /// </summary>
-        /// <param name="key">Имя параметра</param>
-        /// <param name="section">Секция параметра (по умолчанию - main)</param>
+        /// <param name="key">Param name</param>
+        /// <param name="value">Param value</param>
+        /// <param name="section">Param section (default - main)</param>
         public bool KeyExists(string key, string section = "main")
         {
-            return GetString(key, section).Length > 0;
+            return Get(key, section).Length > 0;
         }
 
     }

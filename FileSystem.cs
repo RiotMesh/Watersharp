@@ -5,7 +5,7 @@ namespace Watersharp
 {
 
     /// <summary>
-    /// Работа с файловой системой
+    /// Basic working with File System
     /// </summary>
     public class FileSystem
     {
@@ -13,15 +13,18 @@ namespace Watersharp
         private static StreamReader SR;
         private static StreamWriter SW;
 
+        /*====================================================================================================*/
+        // READING
+
         /// <summary>
-        /// Чтение текста из файла
+        /// Read file
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        public static string Read(string Path)
+        /// <param name="path">Path to file</param>
+        public static string Read(string path)
         {
             string OutputText;
 
-            SR = new StreamReader(Path);
+            SR = new StreamReader(path);
             OutputText = SR.ReadToEnd();
 
             SR.Close();
@@ -31,14 +34,14 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Асинхронное чтение текста из файла
+        /// Read file Async
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        public static async Task<string> ReadAsync(string Path)
+        /// <param name="path">Path to file</param>
+        public static async Task<string> ReadAsync(string path)
         {
             string OutputText;
 
-            SR = new StreamReader(Path);
+            SR = new StreamReader(path);
             OutputText = await SR.ReadToEndAsync();
 
             SR.Close();
@@ -47,82 +50,100 @@ namespace Watersharp
             return OutputText;
         }
 
+        /*====================================================================================================*/
+        // WRITING
+
         /// <summary>
-        /// Запись строки в файл
+        /// Write text to file
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Text">Записываемый текст</param>
-        public static void WriteLine(string Path, string Text)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Writable value</param>
+        public static void WriteLine(string path, string value)
         {
-            SW = new StreamWriter(Path);
-            SW.WriteLine(Text);
+            SW = new StreamWriter(path);
+            SW.WriteLine(value);
 
             SW.Close();
             SW.Dispose();
         }
 
         /// <summary>
-        /// Асинхронная запись строки в файл
+        /// Write text to file Async
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Text">Записываемый текст</param>
-        public static async Task WriteLineAsync(string Path, string Text)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Writable value</param>
+        public static async Task WriteLineAsync(string path, string value)
         {
-            SW = new StreamWriter(Path);
-            await SW.WriteLineAsync(Text);
+            SW = new StreamWriter(path);
+            await SW.WriteLineAsync(value);
 
             SW.Close();
             SW.Dispose();
         }
 
         /// <summary>
-        /// Запись символа в файл
+        /// Write char to file
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Value">Записываемый символ</param>
-        public static void Write(string Path, char[] Value)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Записываемый символ</param>
+        public static void Write(string path, char[] value)
         {
-            SW = new StreamWriter(Path);
-            SW.Write(Value);
+            SW = new StreamWriter(path);
+            SW.Write(value);
 
             SW.Close();
             SW.Dispose();
         }
 
         /// <summary>
-        /// Асинхронная запись символа в файл
+        /// Write char to file Async
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Value">Записываемый символ</param>
-        public static async Task WriteAsync(string Path, char[] Value)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Записываемый символ</param>
+        public static async Task WriteAsync(string path, char[] value)
         {
-            SW = new StreamWriter(Path);
-            await SW.WriteAsync(Value);
+            SW = new StreamWriter(path);
+            await SW.WriteAsync(value);
 
             SW.Close();
             SW.Dispose();
         }
 
+        /*====================================================================================================*/
+        // APPEND
+
         /// <summary>
-        /// Добавление текста в конец файла
+        /// Add text to the end of the file
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Text">Добовляемый текст</param>
-        public static void Append(string Path, string Text)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Added value</param>
+        public static void Append(string path, string value)
         {
-            string CurrentText = Read(Path);
-            Write(Path, (CurrentText + Text).ToCharArray());
+            string CurrentText = Read(path);
+            Write(path, (CurrentText + value).ToCharArray());
         }
 
         /// <summary>
-        /// Асинхронное добавление текста в файл
+        /// Add text to the end of the file Async
         /// </summary>
-        /// <param name="Path">Путь к файлу</param>
-        /// <param name="Text">Записываемый символ</param>
-        public static async Task AppendAsync(string Path, string Text)
+        /// <param name="path">Path to file</param>
+        /// <param name="value">Added value</param>
+        public static async Task AppendAsync(string path, string value)
         {
-            string CurrentText = await ReadAsync(Path);
-            await WriteLineAsync(Path, CurrentText + Text);
+            string CurrentText = await ReadAsync(path);
+            await WriteLineAsync(path, CurrentText + value);
+        }
+
+        /*====================================================================================================*/
+        // FILE INFO
+
+        /// <summary>
+        /// Get file size in bytes
+        /// </summary>
+        /// <param name="path">Path to file</param>
+        public static long FileSize(string path)
+        {
+            return new FileInfo(path).Length;
         }
 
     }

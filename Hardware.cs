@@ -6,7 +6,7 @@ namespace Watersharp
 {
 
     /// <summary>
-    /// Получение информации с датчиков оборудования
+    /// (RU only) Получение информации с датчиков оборудования
     /// </summary>
     public class Hardware
     {

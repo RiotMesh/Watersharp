@@ -5,23 +5,16 @@ namespace Watersharp
 {
 
     /// <summary>
-    /// База некоторых полезных функций
+    /// Something useful features
     /// </summary>
     public class Features
     {
-        /*public static void PrintText(string text, int interval = 10)
-        {
-            for (int i = 0; i < text.Length; i++)
-            {
-                Console.Write(text[i].ToString());
-                Thread.Sleep(interval);
-            }
-        }*/
 
         /// <summary>
-        /// Конвертирование строки в массив байтов
+        /// Convert string to byte array
         /// </summary>
-        /// <param name="str">Требуемая строка</param>
+        /// <param name="str">String value</param>
+        /// <returns>Byte array of string</returns>
         public static byte[] StringToByteArray(string str)
         {
             return str.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
