@@ -44,8 +44,6 @@ namespace Exampler
 
             /*--------------------------------------------*/
 
-            Console.WriteLine(Core.DEVELOPER);
-
             Console.WriteLine(Hardware.CPU_Load());
         }
     }
