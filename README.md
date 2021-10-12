@@ -1,4 +1,5 @@
 # HOW TO USE - MANUAL (EU)
+Watersharp is a library that simplifies working with basic C# functions. Working with files, console, hardware and much more. Perfect for novice developers :)
 
 #### 1. Download the actual library version
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
@@ -9,6 +10,7 @@
 
 
 # Инструкция по подключению (RU)
+Watersharp - это бибилиотека, упрощающая работу с базовыми функциями C#. Работа с файлами, консоль, железо и многое другое. Отлично подойдёт для начинающих разработчиков :)
 
 #### 1. Скачать актуальную версию по ссылке ниже
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
