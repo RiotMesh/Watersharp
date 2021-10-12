@@ -51,4 +51,5 @@ namespace Exampler
 
 
 *P.S - In Visual Studio (or another C# editors) you just need write a class name, and editor show you more information :)*
+
 *P.S - В Visual Stuio (или другом редакторе) достаточно написать имя класса и редактор подскажет вам что за что отвечает*
