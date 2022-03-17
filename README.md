@@ -3,7 +3,7 @@ Watersharp is a library that simplifies working with basic C# functions. Working
 
 #### 1. Download the actual library version
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
-#### 1. Create a new project based on C# .NET Framework 4.5 +
+#### 1. Create a new project based on C# .NET Framework 4.5 + (if dll version lower than 0.3b)
 #### 2. Add link to library into your project
 ###### *Links -> Add link -> Browse -> Find Watersharp.dll -> Add*
 #### 3. Perfect! Now you can fully use library!
@@ -14,7 +14,7 @@ Watersharp - это бибилиотека, упрощающая работу с
 
 #### 1. Скачать актуальную версию по ссылке ниже
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
-#### 1. Создать проект на основе C# .NET Framework 4.5 +
+#### 1. Создать проект на основе C# .NET Framework 4.5 + (если dll версии ниже 0.3b)
 #### 2. Добавить ссылку на библиотеку в свой проект
 ###### *Ссылки -> Добавить ссылку -> Обзор -> Найти Watersharp.dll -> Добавить*
 #### 3. Отлично! Теперь можно использовать библиотеку!
