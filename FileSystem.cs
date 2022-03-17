@@ -13,6 +13,11 @@ namespace Watersharp
         private static StreamReader SR;
         private static StreamWriter SW;
 
+        public enum SizeType
+        {
+            Bytes, KBytes, MBytes, GBytes
+        }
+
         /*====================================================================================================*/
         // READING
 
@@ -141,9 +146,40 @@ namespace Watersharp
         /// Get file size in bytes
         /// </summary>
         /// <param name="path">Path to file</param>
-        public static long FileSize(string path)
+        /// <param name="space">Size units</param>
+        public static long FileSize(string path, SizeType space = SizeType.Bytes)
         {
-            return new FileInfo(path).Length;
+            switch(space)
+            {
+                case SizeType.Bytes:    return new FileInfo(path).Length;
+                case SizeType.KBytes:   return new FileInfo(path).Length / 1024;
+                case SizeType.MBytes:   return new FileInfo(path).Length / 1024 / 1024;
+                case SizeType.GBytes:   return new FileInfo(path).Length / 1024 / 1024 / 1024;
+                default:                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Get folder size in bytes
+        /// </summary>
+        /// <param name="path">Path to folder</param>
+        /// <param name="space">Size units</param>
+        public static long FolderSize(string path, SizeType space = SizeType.Bytes)
+        {
+            string[] allFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+            long totalSize = 0;
+
+            foreach(string file in allFiles)
+                totalSize += FileSize(file);
+
+            switch (space)
+            {
+                case SizeType.Bytes: return totalSize;
+                case SizeType.KBytes: return totalSize / 1024;
+                case SizeType.MBytes: return totalSize / 1024 / 1024;
+                case SizeType.GBytes: return totalSize / 1024 / 1024 / 1024;
+                default: return 0;
+            }
         }
 
     }
