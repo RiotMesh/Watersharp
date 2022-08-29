@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watersharp", "Watersharp.csproj", "{E728DF2F-E6C5-4BF6-8D21-DE5CFCD60887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "..\Tester\Tester.csproj", "{A72FC3AF-7B74-48BF-8131-B7B825EABFE2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{E728DF2F-E6C5-4BF6-8D21-DE5CFCD60887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E728DF2F-E6C5-4BF6-8D21-DE5CFCD60887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E728DF2F-E6C5-4BF6-8D21-DE5CFCD60887}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A72FC3AF-7B74-48BF-8131-B7B825EABFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A72FC3AF-7B74-48BF-8131-B7B825EABFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A72FC3AF-7B74-48BF-8131-B7B825EABFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A72FC3AF-7B74-48BF-8131-B7B825EABFE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

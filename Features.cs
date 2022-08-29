@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace Watersharp
 {
@@ -10,16 +11,26 @@ namespace Watersharp
     public class Features
     {
 
+        private static readonly Encoding encoding = Encoding.Default;
+
         /// <summary>
         /// Convert string to byte array
         /// </summary>
         /// <param name="str">String value</param>
         /// <returns>Byte array of string</returns>
-        public static byte[] StringToByteArray(string str)
+        public static byte[] Encrypt(string str)
         {
-            return str.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(s => Convert.ToByte(s, 16))
-                .ToArray();
+            return encoding.GetBytes(str);
+        }
+
+        /// <summary>
+        /// Convert byte array to string
+        /// </summary>
+        /// <param name="data">Byte array</param>
+        /// <returns>String value</returns>
+        public static string Decrypt(byte[] data)
+        {
+            return encoding.GetString(data);
         }
 
     }

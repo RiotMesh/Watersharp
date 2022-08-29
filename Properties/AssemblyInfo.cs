@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Watersharp Library")]
 [assembly: AssemblyDescription("Simplification for C#")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Leviafan4ik Lab.")]
+[assembly: AssemblyCompany("RiotMesh")]
 [assembly: AssemblyProduct("Watersharp Library")]
-[assembly: AssemblyCopyright("Copyright © Leviafan4ik Lab.  2021")]
-[assembly: AssemblyTrademark("Leviafan4ik Lab.")]
+[assembly: AssemblyCopyright("Copyright © RiotMesh  2022")]
+[assembly: AssemblyTrademark("RiotMesh Watersharp")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.0.3")]
-[assembly: AssemblyFileVersion("0.2.1.0")]
+[assembly: AssemblyVersion("0.0.0.4")]
+[assembly: AssemblyFileVersion("0.3.1.0")]
