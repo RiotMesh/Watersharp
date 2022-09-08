@@ -10,6 +10,11 @@ namespace Watersharp
     public class FileSystem
     {
 
+        private string File;
+
+        private StreamReader SRi;
+        private StreamWriter SWi;
+
         private static StreamReader SR;
         private static StreamWriter SW;
 
@@ -17,6 +22,108 @@ namespace Watersharp
         {
             Bytes, KBytes, MBytes, GBytes
         }
+
+        public FileSystem(string filePath)
+        {
+            File = filePath;
+            SRi = new StreamReader(filePath);
+            SWi = new StreamWriter(filePath);
+        }
+
+        #region Instance Actions
+
+        /// <summary>
+        /// Read file
+        /// </summary>
+        public string Read()
+        {
+            return SRi.ReadToEnd();
+        }
+
+        /// <summary>
+        /// Read file Async
+        /// </summary>
+        public async Task<string> ReadAsync()
+        {
+            return await SRi.ReadToEndAsync();
+        }
+
+        /*====================================================================================================*/
+        // WRITING
+
+        /// <summary>
+        /// Write text to file
+        /// </summary>
+        /// <param name="value">Writable value</param>
+        public void WriteLine(string value)
+        {
+            SWi.WriteLine(value);
+        }
+
+        /// <summary>
+        /// Write text to file Async
+        /// </summary>
+        /// <param name="value">Writable value</param>
+        public async Task WriteLineAsync(string value)
+        {
+            await SW.WriteLineAsync(value);
+        }
+
+        /// <summary>
+        /// Write char to file
+        /// </summary>
+        /// <param name="value">Writable char</param>
+        public void Write(string value)
+        {
+            SWi.Write(value);
+        }
+
+        /// <summary>
+        /// Write char to file Async
+        /// </summary>
+        /// <param name="value">Writable char</param>
+        public async Task WriteAsync(string value)
+        {
+            await SW.WriteAsync(value);
+        }
+
+        /*====================================================================================================*/
+        // APPEND
+
+        /// <summary>
+        /// Add text to end of file
+        /// </summary>
+        /// <param name="value">Added value</param>
+        public void Append(string value)
+        {
+            Write(File, (Read(File) + value).ToCharArray());
+        }
+
+        /// <summary>
+        /// Add text to end of file Async
+        /// </summary>
+        /// <param name="value">Added value</param>
+        public async Task AppendAsync(string value)
+        {
+            string CurrentText = await ReadAsync(File);
+            await WriteLineAsync(File, CurrentText + value);
+        }
+
+        /// <summary>
+        /// Close file and free file
+        /// </summary>
+        public void Close()
+        {
+            SRi.Close();
+            SRi.Dispose();
+            SWi.Close();
+            SWi.Dispose();
+        }
+
+        #endregion
+
+
+        #region Static Actions
 
         /*====================================================================================================*/
         // READING
@@ -181,6 +288,8 @@ namespace Watersharp
                 default: return 0;
             }
         }
+
+        #endregion
 
     }
 }

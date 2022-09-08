@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Ethernet.cs" />
     <Compile Include="WConsole.cs" />
     <Compile Include="Features.cs" />
     <Compile Include="FileSystem.cs" />
