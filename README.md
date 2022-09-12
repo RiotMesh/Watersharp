@@ -1,56 +1,168 @@
-# HOW TO USE - MANUAL (EU)
+# HOW TO USE - MANUAL
+**Compatable with .NET Framework 4.7.2 + (Console, WinForms, WPF)**
+
 Watersharp is a library that simplifies working with basic C# functions. Working with files, console, hardware and much more. Perfect for novice developers :)
 
 #### 1. Download the actual library version
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
-#### 1. Create a new project based on C# .NET Framework 4.5 + (if dll version lower than 0.3b)
-#### 2. Add link to library into your project
-###### *Links -> Add link -> Browse -> Find Watersharp.dll -> Add*
-#### 3. Perfect! Now you can fully use library!
+#### 2. Create a new project based on C# .NET Framework 4.7.2 + (4.7.2 + only for WS 1.0 +)
+#### 3. Add link to library into your project
+###### *Links -> Add link -> Browse -> Find Watersharp-xxx.dll -> Add*
+#### 4. Perfect! Now you can fully use library!
 
-
-# Инструкция по подключению (RU)
-Watersharp - это бибилиотека, упрощающая работу с базовыми функциями C#. Работа с файлами, консоль, железо и многое другое. Отлично подойдёт для начинающих разработчиков :)
-
-#### 1. Скачать актуальную версию по ссылке ниже
-[https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
-#### 1. Создать проект на основе C# .NET Framework 4.5 + (если dll версии ниже 0.3b)
-#### 2. Добавить ссылку на библиотеку в свой проект
-###### *Ссылки -> Добавить ссылку -> Обзор -> Найти Watersharp.dll -> Добавить*
-#### 3. Отлично! Теперь можно использовать библиотеку!
-
-
-------------
-*work example*
-
-*пример использования*
+# EXAMPLES
+#### WConsole
+Improve basic console input/output like in Python
 
 ```csharp
 using System;
 using Watersharp;
 
-namespace Exampler
+namespace WSTest
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
+            string name = WConsole.ReadLine("Input your name: ");
+            Console.WriteLine("Hello, {0}!", name);
 
-            FileSystem.WriteLine(@"D:\MyFile.txt", "Hello World!");             //пример записи в файл
-
-            FileSystem.Append(@"D:\MyFile.txt", "Again hello world!");          //дополнение текста в файле без перезаписи
-
-            FileSystem.Read(@"D:\MyFile.txt");                                  //пример чтения из файла    
-
-            /*--------------------------------------------*/
-
-            Console.WriteLine(Hardware.CPU_Load());
+            WConsole.ReadKey("Press any key to exit ...");
         }
     }
 }
 ```
 
+#### Internet
+This class improve you work with internet! Take a look...
 
-*P.S - In Visual Studio (or another C# editors) you just need write a class name, and editor show you more information :)*
+```csharp
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Net;
+using Watersharp;
 
-*P.S - В Visual Stuio (или другом редакторе) достаточно написать имя класса и редактор подскажет вам что за что отвечает*
+namespace WSTest
+{
+    internal class DownloadTEST
+    {
+        private static int prevPerc = 0;
+        private static Stopwatch sw = new Stopwatch();
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Downloading file...");
+            sw.Start();
+
+            // call file downloading and subscribe to special events
+            // for traking progress and completion
+            Internet.DownloadFileAdvanced("riotmesh.ru/File.zip", "File.zip",
+                OnDownloadProgressChanged, OnDownloadCompleted);
+
+            Console.ReadKey();
+        }
+
+        private static void OnDownloadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine("Download completed!");
+        }
+
+        private static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // calculate average download speed using StopWatch
+            string speed = (Convert.ToDouble(e.BytesReceived) / 1024 / 1024 / sw.Elapsed.TotalSeconds).ToString("0.0") + " Мб/с";
+
+            // display information into console title
+            if (e.ProgressPercentage > prevPerc)
+            {
+                Console.Title = e.ProgressPercentage.ToString() + "% -> " + speed;
+                prevPerc = e.ProgressPercentage;
+            }
+        }
+    }
+}
+```
+
+#### Hardware
+This class improve you work with internet! Take a look...
+
+```csharp
+using System;
+using Watersharp;
+
+namespace WSTest
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(Hardware.CPUModel()); // cpu name
+            Console.WriteLine(Hardware.GPUModel()); // gpu name
+            Console.WriteLine(Hardware.CPUFreq());  // cpu current frequency
+            Console.WriteLine(Hardware.MEMApp());   // application RAM usage
+            // and some other...
+
+            Console.ReadKey();
+        }
+    }
+}
+```
+
+#### FileSystem
+Simple work with files (reading / writing / append)
+
+```csharp
+using System;
+using Watersharp;
+
+namespace WSTest
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // static method use
+            string fileName = WConsole.ReadLine("Input file name: ");
+            Console.WriteLine(FileSystem.Read(fileName));
+
+            // instance
+            FileSystem file = new FileSystem("test.txt");
+            Console.WriteLine(file.ReadAsync());
+
+            // and some other mehods inside FileSystem class!
+        }
+    }
+}
+```
+
+#### Config
+Simple work with configuration files (.ini)
+
+```csharp
+using System;
+using Watersharp;
+
+namespace WSTest
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // static method use
+            Config.Set("config.ini", "version", "1.0");
+            Config.Set("config.ini", "year", 2022);
+            Console.WriteLine(Config.Get("config.ini", "version"));
+            Console.WriteLine(Config.GetInt("config.ini", "year"));
+
+            // instance
+            Config cfg = new Config("config.ini");
+            cfg.Set("build", "#05");
+            cfg.Set("size_mb", 0.23);
+            Console.WriteLine(cfg.GetFloat("size_mb"));
+
+            // and some other mehods inside Config class!
+        }
+    }
+}
+```
