@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Management;
 using System.Windows.Forms;
 
 namespace Watersharp
@@ -21,10 +23,31 @@ namespace Watersharp
         private static PerformanceCounter writehdd = new PerformanceCounter("Физический диск", "Скорость записи на диск (байт/с)", "0 C: D:");
         private static PerformanceCounter readhdd = new PerformanceCounter("Физический диск", "Скорость чтения с диска (байт/с)", "0 C: D:");
 
+        private static List<string> GetHardwareInfo(string WIN32_Class, string ClassItemField)
+        {
+            List<string> result = new List<string>();
+
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM " + WIN32_Class);
+
+            try
+            {
+                foreach (ManagementObject obj in searcher.Get())
+                {
+                    result.Add(obj[ClassItemField].ToString().Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
         /// <summary>
-        /// Процент загруженности процессора
+        /// Percentage of CPU usage
         /// </summary>
-        public static double CPU_Load()
+        public static double CPULoad()
         {
             try
             {
@@ -37,9 +60,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Рабочая частота процессора
+        /// Processor operating frequency
         /// </summary>
-        public static double CPU_Freq()
+        public static double CPUFreq()
         {
             try
             {
@@ -52,9 +75,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Объём памяти, занимаемый текущим приложением (Мегабайты)
+        /// The amount of memory occupied by the current application (Megabytes)
         /// </summary>
-        public static double MEM_App()
+        public static double MEMApp()
         {
             try
             {
@@ -67,9 +90,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Общая загруженность памяти
+        /// Total RAM usage
         /// </summary>
-        public static double MEM_Load()
+        public static double MEMLoad()
         {
             try
             {
@@ -82,9 +105,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Процент нагрузки главного диска системы
+        /// The percentage of loading of the main disk of the system
         /// </summary>
-        public static double HDD_Load()
+        public static double HDDLoad()
         {
             try
             {
@@ -97,9 +120,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Текущая активная скорость записи на диск
+        /// Current disk write speed
         /// </summary>
-        public static double HDD_Write()
+        public static double HDDWrite()
         {
             try
             {
@@ -112,9 +135,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Текущая активная скорость чтения с диска
+        /// Current disk read speed
         /// </summary>
-        public static double HDD_Read()
+        public static double HDDRead()
         {
             try
             {
@@ -127,9 +150,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Оставшийся процент заряда батареи (для устройств с АКБ)
+        /// Remaining battery charge percentage (for devices with battery)
         /// </summary>
-        public static float BATTERY_RemainingP()
+        public static float BATTERYRemainingP()
         {
             try
             {
@@ -142,9 +165,9 @@ namespace Watersharp
         }
 
         /// <summary>
-        /// Приблизительный срок работы батареи (для устройств с АКБ)
+        /// Approximate battery life (for devices with battery)
         /// </summary>
-        public static string BATTERY_Remaining()
+        public static string BATTERYRemaining()
         {
             try
             {
@@ -156,6 +179,16 @@ namespace Watersharp
             {
                 return "-";
             }
+        }
+
+        public static string CPUModel()
+        {
+            return GetHardwareInfo("Win32_Processor", "Name")[0];
+        }
+
+        public static string GPUModel()
+        {
+            return GetHardwareInfo("Win32_VideoController", "Name")[0];
         }
 
     }
