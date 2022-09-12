@@ -57,7 +57,7 @@ namespace WSTest
 
             // call file downloading and subscribe to special events
             // for traking progress and completion
-            Internet.DownloadFileAdvanced("riotmesh.ru/File.zip", "File.zip",
+            Internet.DownloadFileAdvanced("website.com/File.zip", "File.zip",
                 OnDownloadProgressChanged, OnDownloadCompleted);
 
             Console.ReadKey();
