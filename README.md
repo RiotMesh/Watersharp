@@ -1,5 +1,5 @@
 # HOW TO USE - MANUAL
-Compatable with .NET Framework 4.7.2 + (Console, WinForms, WPF)
+**Compatable with .NET Framework 4.7.2 + (Console, WinForms, WPF)**
 
 Watersharp is a library that simplifies working with basic C# functions. Working with files, console, hardware and much more. Perfect for novice developers :)
 
