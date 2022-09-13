@@ -3,6 +3,8 @@
 
 Watersharp is a library that simplifies working with basic C# functions. Working with files, console, hardware and much more. Perfect for novice developers :)
 
+NuGet avilable: https://www.nuget.org/packages/RiotMesh.Watersharp
+
 #### 1. Download the actual library version
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
 #### 2. Create a new project based on C# .NET Framework 4.7.2 + (4.7.2 + only for WS 1.0 +)
