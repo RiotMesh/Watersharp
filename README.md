@@ -1,3 +1,4 @@
+![avatar](https://github.com/RiotMesh/Watersharp/blob/main/icon.png)
 # HOW TO USE - MANUAL
 **Compatable with .NET Framework 4.7.2 + (Console, WinForms, WPF)**
 
