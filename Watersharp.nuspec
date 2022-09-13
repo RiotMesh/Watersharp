@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>RiotMesh.Watersharp</id>
+    <version>1.0.1</version>
+    <title>Watersharp</title>
+    <authors>RiotMesh</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <icon>icon.png</icon>
+    <projectUrl>https://github.com/RiotMesh/Watersharp</projectUrl>
+    <description>Simplification for C#. Easy acces to files, internet features, configuration files (.ini), hardware info and more</description>
+    <releaseNotes>Initial NuGet release</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>C# .NET Framework WinForms WPF Library Simple Simplification FileSystem Internet Configuration</tags>
+  </metadata>
+  <files>
+	  <file src="icon.png" target="" />
+  </files>
+</package>
