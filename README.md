@@ -88,7 +88,7 @@ namespace WSTest
 ```
 
 #### Hardware
-This class improve you work with internet! Take a look...
+Basic hardware information
 
 ```csharp
 using System;
