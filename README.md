@@ -1,7 +1,10 @@
+![avatar](https://github.com/RiotMesh/Watersharp/blob/main/icon.png)
 # HOW TO USE - MANUAL
 **Compatable with .NET Framework 4.7.2 + (Console, WinForms, WPF)**
 
 Watersharp is a library that simplifies working with basic C# functions. Working with files, console, hardware and much more. Perfect for novice developers :)
+
+NuGet avilable: https://www.nuget.org/packages/RiotMesh.Watersharp
 
 #### 1. Download the actual library version
 [https://github.com/Leviafan4ik-s-Lab/Watersharp/releases](https://github.com/Leviafan4ik-s-Lab/Watersharp/releases "https://github.com/Leviafan4ik-s-Lab/Watersharp/releases")
