@@ -10,7 +10,7 @@ namespace Watersharp
     public class FileSystem
     {
 
-        private string File;
+        private string file;
 
         private StreamReader SRi;
         private StreamWriter SWi;
@@ -25,9 +25,10 @@ namespace Watersharp
 
         public FileSystem(string filePath)
         {
-            File = filePath;
-            SRi = new StreamReader(filePath);
-            SWi = new StreamWriter(filePath);
+            if (File.Exists(filePath))
+                file = filePath;
+            else
+                File.Create(filePath);
         }
 
         #region Instance Actions
@@ -37,7 +38,12 @@ namespace Watersharp
         /// </summary>
         public string Read()
         {
-            return SRi.ReadToEnd();
+            SRi = new StreamReader(file);
+            string _cashe = SRi.ReadToEnd();
+
+            SRi.Close();
+            SRi.Dispose();
+            return _cashe;
         }
 
         /// <summary>
@@ -45,7 +51,12 @@ namespace Watersharp
         /// </summary>
         public async Task<string> ReadAsync()
         {
-            return await SRi.ReadToEndAsync();
+            SRi = new StreamReader(file);
+            string _cashe = await SRi.ReadToEndAsync();
+
+            SRi.Close();
+            SRi.Dispose();
+            return _cashe;
         }
 
         /*====================================================================================================*/
@@ -57,7 +68,10 @@ namespace Watersharp
         /// <param name="value">Writable value</param>
         public void WriteLine(string value)
         {
+            SWi = new StreamWriter(file);
             SWi.WriteLine(value);
+            SWi.Close();
+            SWi.Dispose();
         }
 
         /// <summary>
@@ -66,7 +80,10 @@ namespace Watersharp
         /// <param name="value">Writable value</param>
         public async Task WriteLineAsync(string value)
         {
-            await SW.WriteLineAsync(value);
+            SWi = new StreamWriter(file);
+            await SWi.WriteLineAsync(value);
+            SWi.Close();
+            SWi.Dispose();
         }
 
         /// <summary>
@@ -75,7 +92,10 @@ namespace Watersharp
         /// <param name="value">Writable char</param>
         public void Write(string value)
         {
+            SWi = new StreamWriter(file);
             SWi.Write(value);
+            SWi.Close();
+            SWi.Dispose();
         }
 
         /// <summary>
@@ -84,7 +104,10 @@ namespace Watersharp
         /// <param name="value">Writable char</param>
         public async Task WriteAsync(string value)
         {
-            await SW.WriteAsync(value);
+            SWi = new StreamWriter(file);
+            await SWi.WriteAsync(value);
+            SWi.Close();
+            SWi.Dispose();
         }
 
         /*====================================================================================================*/
@@ -96,7 +119,7 @@ namespace Watersharp
         /// <param name="value">Added value</param>
         public void Append(string value)
         {
-            Write(File, (Read(File) + value).ToCharArray());
+            Write(file, (Read(file) + value).ToCharArray());
         }
 
         /// <summary>
@@ -105,8 +128,7 @@ namespace Watersharp
         /// <param name="value">Added value</param>
         public async Task AppendAsync(string value)
         {
-            string CurrentText = await ReadAsync(File);
-            await WriteLineAsync(File, CurrentText + value);
+            await WriteAsync(file, (ReadAsync(file) + value).ToCharArray());
         }
 
         /// <summary>
@@ -172,6 +194,9 @@ namespace Watersharp
         /// <param name="value">Writable value</param>
         public static void WriteLine(string path, string value)
         {
+            if (!File.Exists(path))
+                File.Create(path);
+
             SW = new StreamWriter(path);
             SW.WriteLine(value);
 
@@ -186,6 +211,9 @@ namespace Watersharp
         /// <param name="value">Writable value</param>
         public static async Task WriteLineAsync(string path, string value)
         {
+            if (!File.Exists(path))
+                File.Create(path);
+
             SW = new StreamWriter(path);
             await SW.WriteLineAsync(value);
 
@@ -200,6 +228,9 @@ namespace Watersharp
         /// <param name="value">Записываемый символ</param>
         public static void Write(string path, char[] value)
         {
+            if (!File.Exists(path))
+                File.Create(path);
+
             SW = new StreamWriter(path);
             SW.Write(value);
 
@@ -214,6 +245,9 @@ namespace Watersharp
         /// <param name="value">Записываемый символ</param>
         public static async Task WriteAsync(string path, char[] value)
         {
+            if (!File.Exists(path))
+                File.Create(path);
+
             SW = new StreamWriter(path);
             await SW.WriteAsync(value);
 
@@ -253,8 +287,8 @@ namespace Watersharp
         /// Get file size in bytes
         /// </summary>
         /// <param name="path">Path to file</param>
-        /// <param name="space">Size units</param>
-        public static long FileSize(string path, SizeType space = SizeType.Bytes)
+        /// <param name="space">Size units (b, kb, mb, gb)</param>
+        public static long GetFileSize(string path, SizeType space = SizeType.Bytes)
         {
             switch(space)
             {
@@ -270,14 +304,14 @@ namespace Watersharp
         /// Get folder size in bytes
         /// </summary>
         /// <param name="path">Path to folder</param>
-        /// <param name="space">Size units</param>
-        public static long FolderSize(string path, SizeType space = SizeType.Bytes)
+        /// <param name="space">Size units (b, kb, mb, gb)</param>
+        public static long GetFolderSize(string path, SizeType space = SizeType.Bytes)
         {
             string[] allFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
             long totalSize = 0;
 
             foreach(string file in allFiles)
-                totalSize += FileSize(file);
+                totalSize += GetFileSize(file);
 
             switch (space)
             {
